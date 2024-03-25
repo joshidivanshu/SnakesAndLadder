@@ -1,0 +1,14 @@
+{
+  "numberOfPlayers": 2,
+  "boardSize": 10,
+  "numberOfSnakes": 2,
+  "numberOfLadders": 2,
+  "numberOfDice": 1,
+  "movementStrategy": "min",
+  "numberOfCrocodiles" : 1,
+  "numberOfMines" : 1,
+  "players": [
+    { "name": "Player1", "currentPosition": {"row":0, "column":0} },
+    { "name": "Player2", "currentPosition": {"row":0, "column":0} }
+  ]
+}
