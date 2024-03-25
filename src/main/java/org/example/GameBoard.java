@@ -31,6 +31,15 @@ public class GameBoard {
         placeMines(gameConfig);
     }
 
+    public GameBoard(int boardSize, int numberOfDice) {
+        this.snakes = new HashMap<>();
+        this.ladders = new HashMap<>();
+        this.specialObjects = new HashMap<>();
+        this.boardSize = boardSize;
+        this.numberOfDice = numberOfDice;
+        this.random = new Random();
+    }
+
     private void placeSnakesAndLadders(GameConfig gameConfig) {
         // Place snakes
         for (int i = 0; i < gameConfig.getNumberOfSnakes(); i++) {

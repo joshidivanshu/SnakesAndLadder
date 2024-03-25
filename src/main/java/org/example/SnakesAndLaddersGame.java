@@ -16,10 +16,17 @@ public class SnakesAndLaddersGame {
         * auto - automatic logic to generate snakes and ladders taking input in the json file and running the game.
         * */
         String executionType = scanner.next();
+        if(executionType.equalsIgnoreCase("normal")) {
+            GameBoard gameBoard = new GameBoard(10, 1);
+            List<Player> players = new ArrayList<>();
+            DriverCode.manualInput(scanner, gameBoard, players);
+            normalGameExecution(players, gameBoard);
+            return;
+        }
 
 
         // Read game configuration from JSON file
-        GameConfig gameConfig = GameConfigReader.readGameConfig("E:/SnakesAndLaddersGameSolution/src/main/java/org/example/game_config.json");
+        GameConfig gameConfig = GameConfigReader.readGameConfig("/Users/divajosh/Downloads/SnakesAndLaddersGameSolution/src/main/java/org/example/game_config.json");
         System.out.println(gameConfig);
 
         // Create game board with snakes, ladders, and special objects
@@ -27,20 +34,10 @@ public class SnakesAndLaddersGame {
         List<Player> players = new ArrayList<>();
         String movementStrategy = "";
 
-        //If it is normal execution let's not update using the config file.
-        if (!executionType.equalsIgnoreCase("normal") && gameConfig != null) {
+        if (gameConfig != null) {
             players = gameConfig.getPlayers();
             movementStrategy = gameConfig.getMovementStrategy();
         }
-
-        if (executionType.equalsIgnoreCase("normal")) {
-            gameBoard.setBoardSize(10);
-            gameBoard.setNumberOfDice(1);
-            DriverCode.manualInput(scanner, gameBoard, players);
-            normalGameExecution(players, gameBoard);
-            return;
-        }
-
 
 
         //Manual Configurations can be added here.
@@ -58,7 +55,7 @@ public class SnakesAndLaddersGame {
     private static void normalGameExecution(List<Player> players, GameBoard gameBoard) {
         Dice dice = new Dice();
         int currentPlayerIndex = 0;
-        while (!isGameFinished(players)) {
+        while (!isGameFinished(players, gameBoard)) {
             Player currentPlayer = players.get(currentPlayerIndex);
             int[] diceValues = {dice.roll()};
 
@@ -84,7 +81,7 @@ public class SnakesAndLaddersGame {
     private static void simulateGame(List<Player> players, GameBoard gameBoard, String movementStrategy, String manual, Scanner scanner) {
         Dice dice = new Dice();
         int currentPlayerIndex = 0;
-        while (!isGameFinished(players)) {
+        while (!isGameFinished(players, gameBoard)) {
             Player currentPlayer = players.get(currentPlayerIndex);
             int[] diceValues = new int[gameBoard.getNumberOfDice()];
             if( manual.equalsIgnoreCase("manual")) {
@@ -126,9 +123,9 @@ public class SnakesAndLaddersGame {
         System.out.println("Game Over");
     }
 
-    private static boolean isGameFinished(List<Player> players) {
+    private static boolean isGameFinished(List<Player> players, GameBoard gameBoard) {
         for (Player player : players) {
-            if (player.getCurrentPosition().getRow() == 10 && player.getCurrentPosition().getColumn() == 0) {
+            if (player.getCurrentPosition().getRow() == gameBoard.getBoardSize() && player.getCurrentPosition().getColumn() == 0) {
                 return true;
             }
         }

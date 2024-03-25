@@ -1,6 +1,6 @@
 {
   "numberOfPlayers": 5,
-  "boardSize": 10,
+  "boardSize": 9,
   "numberOfSnakes": 5,
   "numberOfLadders": 3,
   "numberOfDice": 1,
