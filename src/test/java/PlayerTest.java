@@ -13,11 +13,7 @@ public class PlayerTest {
     void testMoveWithValidDiceValues() {
         Player player = new Player("Player 1", new BoardElement(0, 0), null, 0);
 
-        GameConfig gameConfig = new GameConfig();
-        gameConfig.setBoardSize(10);
-        gameConfig.setNumberOfDice(1);
-
-        GameBoard gameBoard = new GameBoard(gameConfig);
+        GameBoard gameBoard = new GameBoard(10,1);
         String movementStrategyValue = "sum";
         int[] diceValues = {2};
 
