@@ -151,5 +151,28 @@ public class SnakesAndLaddersGameTest {
         assertEquals(new BoardElement(2, 2), players.get(1).getCurrentPosition());
     }
 
+    @Test
+    public void testNormalSnakesLadderExecution() {
+        GameBoard gameBoard = new GameBoard(10, 1);
+        List<Player> players = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            Player player= new Player("Player" + (i + 1), new BoardElement(0, 0), null, 0);
+            players.add(player);
+        }
+        String input = "normal\n" +
+                "1\n" +
+                "78 26\n" +
+                "1\n" +
+                "5 67\n" +
+                "2\n" +
+                "player1 0\n" +
+                "player2 0\n";
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
+
+        SnakesAndLaddersGame.main(new String[]{});
+
+    }
+
 
 }
