@@ -118,4 +118,48 @@ public class GameBoard {
         int column = index % boardSize;
         return new BoardElement(row, column);
     }
+
+    public void move(int []diceValues,Player player) {
+
+        if (player.getMineCooldown() > 0) {
+            player.setCoolDown(player.getMineCooldown() - 1);
+            System.out.println("Player " +  player.getName() + " is trapped by a mine. Skipping turn...");
+            return;
+        }
+        MovementStrategy movementStrategy = this.getMovementStrategy();
+        int steps = 0;
+        if( movementStrategy != null) {
+            steps = movementStrategy.calculateMove(diceValues);
+        }
+        else {
+            steps = diceValues[0];
+        }
+
+        BoardElement previousPosition = player.getCurrentPosition();
+        int newPosition = player.getCurrentPosition().getRow() * 10 + player.getCurrentPosition().getColumn() + steps;
+
+        // Check if the new position is within the bounds of the game board
+        int newRow = newPosition / 10;
+        int newColumn = newPosition % 10;
+        if (isInvalidMove(newRow, newColumn, player)) {
+            return;
+        }
+
+        player.setCurrentPosition(new BoardElement(newRow, newColumn));
+        System.out.println(player.getName() + " moved from " + previousPosition + " to " + player.getCurrentPosition());
+
+    }
+
+    public boolean isInvalidMove(int newRow, int newColumn,Player player) {
+        if (newRow < 0 || newRow > this.getBoardSize() || newColumn < 0 || newColumn > this.getBoardSize()) {
+            System.out.println("Invalid move: Player " + player.getName() + " attempted to move out of bounds.");
+            return true;
+        }
+        return false;
+    }
+
+    public void setCoolDown(Player player, int value) {
+        player.setCoolDown(value);
+        return;
+    }
 }

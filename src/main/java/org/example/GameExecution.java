@@ -17,7 +17,7 @@ public class GameExecution {
             }
 
             // Move player
-            currentPlayer.move(diceValues, gameBoard);
+            gameBoard.move(diceValues, currentPlayer);
 
             //check if after moving the player encounters a snake or a ladder.
             GameUtility.checkIfSnakeOrLadder(currentPlayer, gameBoard);
@@ -59,7 +59,7 @@ public class GameExecution {
             }
 
             // Move player
-            currentPlayer.move(diceValues, gameBoard);
+            gameBoard.move(diceValues, currentPlayer);
 
             //check if after moving the player encounters a snake or a ladder.
             GameUtility.checkIfSnakeOrLadder(currentPlayer, gameBoard);
