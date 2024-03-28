@@ -10,7 +10,6 @@ import java.util.Random;
 @Data
 @AllArgsConstructor
 public class GameBoard {
-    private int coolDown;
     private int numberOfDice;
     private int boardSize;
     private Map<BoardElement, Integer> snakes;
@@ -25,7 +24,6 @@ public class GameBoard {
         this.boardSize = gameConfig.getBoardSize();
         this.numberOfDice = gameConfig.getNumberOfDice();
         this.random = new Random();
-        this.coolDown = 2;
         placeSnakesAndLadders(gameConfig);
         placeCrocodiles(gameConfig);
         placeMines(gameConfig);
@@ -92,9 +90,6 @@ public class GameBoard {
             specialObjects.put(mineLocation, SpecialObjectType.MINE);
         }
     }
-
-
-
 
     public BoardElement getPositionFromIndex(int index) {
         int row = index / boardSize;
