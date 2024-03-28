@@ -58,7 +58,7 @@ public class GameUtility {
                     System.out.println(player.getName() + " encountered a crocodile and moved 5 steps back to " + player.getCurrentPosition());
                     break;
                 case MINE:
-                    player.setCoolDown(gameBoard.getCoolDown()); // Set cooldown to 2 turns
+                    gameBoard.setCoolDown(player, gameBoard.getCoolDown()); // Set cooldown to 2 turns
                     System.out.println(player.getName() + " encountered a mine and will be held for 2 turns");
                     break;
             }
