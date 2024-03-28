@@ -2,6 +2,10 @@ package org.example;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.example.movementStrategy.MaxMovementStrategy;
+import org.example.movementStrategy.MinMovementStrategy;
+import org.example.movementStrategy.MovementStrategy;
+import org.example.movementStrategy.SumMovementStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,20 +14,24 @@ import java.util.Random;
 @Data
 @AllArgsConstructor
 public class GameBoard {
+    private int coolDown;
     private int numberOfDice;
     private int boardSize;
     private Map<BoardElement, Integer> snakes;
     private Map<BoardElement, Integer> ladders;
     private Map<BoardElement, SpecialObjectType> specialObjects;
     private Random random;
+    private MovementStrategy movementStrategy;
 
     public GameBoard(GameConfig gameConfig) {
+        this.coolDown = 2;
         this.snakes = new HashMap<>();
         this.ladders = new HashMap<>();
         this.specialObjects = new HashMap<>();
         this.boardSize = gameConfig.getBoardSize();
         this.numberOfDice = gameConfig.getNumberOfDice();
         this.random = new Random();
+        this.movementStrategy = createMovementStrategy(gameConfig.getMovementStrategy());
         placeSnakesAndLadders(gameConfig);
         placeCrocodiles(gameConfig);
         placeMines(gameConfig);
@@ -36,6 +44,20 @@ public class GameBoard {
         this.boardSize = boardSize;
         this.numberOfDice = numberOfDice;
         this.random = new Random();
+        this.movementStrategy = null;
+    }
+
+    public MovementStrategy createMovementStrategy(String input) {
+        if( input != null) {
+            input = input.toLowerCase();
+            return switch (input) {
+                case "sum" -> new SumMovementStrategy();
+                case "min" -> new MinMovementStrategy();
+                case "max" -> new MaxMovementStrategy();
+                default -> null;
+            };
+        }
+        return null;
     }
 
     private void placeSnakesAndLadders(GameConfig gameConfig) {

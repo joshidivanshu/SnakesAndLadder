@@ -78,6 +78,6 @@ public class SnakesAndLaddersGame {
             ManualOverrideHandler.performManualOverride(players, gameBoard, scanner);
         }
 
-        GameExecution.simulateGame(players, gameBoard, movementStrategy, executionType, scanner);
+        GameExecution.simulateGame(players, gameBoard, executionType, scanner);
     }
 }

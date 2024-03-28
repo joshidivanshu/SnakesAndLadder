@@ -17,7 +17,7 @@ public class GameExecution {
             }
 
             // Move player
-            currentPlayer.move(diceValues, gameBoard, "");
+            currentPlayer.move(diceValues, gameBoard);
 
             //check if after moving the player encounters a snake or a ladder.
             GameUtility.checkIfSnakeOrLadder(currentPlayer, gameBoard);
@@ -31,7 +31,7 @@ public class GameExecution {
         System.out.println("Game Over");
     }
 
-    public static void simulateGame(List<Player> players, GameBoard gameBoard, String movementStrategy, String manual, Scanner scanner) {
+    public static void simulateGame(List<Player> players, GameBoard gameBoard, String manual, Scanner scanner) {
         Dice dice = new Dice();
         int currentPlayerIndex = 0;
         while (!GameUtility.isGameFinished(players, gameBoard)) {
@@ -59,7 +59,7 @@ public class GameExecution {
             }
 
             // Move player
-            currentPlayer.move(diceValues, gameBoard, movementStrategy);
+            currentPlayer.move(diceValues, gameBoard);
 
             //check if after moving the player encounters a snake or a ladder.
             GameUtility.checkIfSnakeOrLadder(currentPlayer, gameBoard);

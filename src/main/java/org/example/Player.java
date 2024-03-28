@@ -19,27 +19,14 @@ public class Player {
     private BoardElement currentPosition;
     private MovementStrategy movementStrategy;
     private int mineCooldown;
-    public void move(int []diceValues, GameBoard gameBoard, String movementStrategyValue) {
+    public void move(int []diceValues, GameBoard gameBoard) {
 
         if (mineCooldown > 0) {
             mineCooldown--;
             System.out.println("Player " + name + " is trapped by a mine. Skipping turn...");
             return;
         }
-
-        String getMovStrategy = movementStrategyValue.toLowerCase();
-        if (getMovStrategy.equals("min")) {
-            movementStrategy = new MinMovementStrategy();
-        }
-        else if(getMovStrategy.equals("max")) {
-            movementStrategy = new MaxMovementStrategy();
-        }
-        else if (getMovStrategy.equals("sum")) {
-            movementStrategy = new SumMovementStrategy();
-        }
-        else if (getMovStrategy.isEmpty()) {
-            movementStrategy = null;
-        }
+        MovementStrategy movementStrategy = gameBoard.getMovementStrategy();
         int steps = 0;
         if( movementStrategy != null) {
             steps = movementStrategy.calculateMove(diceValues);

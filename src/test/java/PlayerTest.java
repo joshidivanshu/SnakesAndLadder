@@ -17,7 +17,7 @@ public class PlayerTest {
         String movementStrategyValue = "sum";
         int[] diceValues = {2};
 
-        player.move(diceValues, gameBoard, movementStrategyValue);
+        player.move(diceValues, gameBoard);
 
         // Check if the player moved to the correct position
         assertEquals(new BoardElement(0, 2), player.getCurrentPosition(), "Player should move to the correct position");
