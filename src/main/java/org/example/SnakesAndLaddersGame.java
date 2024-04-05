@@ -10,7 +10,7 @@ public class SnakesAndLaddersGame {
     private final static String MANUAL = "manual";
     private final static String AUTO = "auto";
     private final static String NORMAL = "normal";
-    private final static String FILE_PATH = "E:/SnakesAndLaddersGameSolution/src/main/java/org/example/";
+    private final static String FILE_PATH = "/Users/divanshujoshi/Documents/SnakesGame/SnakesAndLadder/src/main/java/org/example/";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -49,6 +49,7 @@ public class SnakesAndLaddersGame {
 
     public static void automaticGameExecution(Scanner scanner) {
         GameConfig gameConfig = readGameConfigFromFile("game_config.json");
+        System.out.println(gameConfig);
         performGameExecution(gameConfig, AUTO, scanner);
     }
 

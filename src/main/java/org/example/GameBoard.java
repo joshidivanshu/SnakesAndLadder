@@ -122,7 +122,7 @@ public class GameBoard {
     public void move(int []diceValues,Player player) {
 
         if (player.getMineCooldown() > 0) {
-            player.setCoolDown(player.getMineCooldown() - 1);
+            player.setMineCooldown(player.getMineCooldown() - 1);
             System.out.println("Player " +  player.getName() + " is trapped by a mine. Skipping turn...");
             return;
         }
@@ -159,7 +159,7 @@ public class GameBoard {
     }
 
     public void setCoolDown(Player player, int value) {
-        player.setCoolDown(value);
+        player.setMineCooldown(value);
         return;
     }
 }
