@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class GameConfigReaderTest {
     @Test
     void testReadGameConfig() {
-        String fileName = "E:/SnakesAndLaddersGameSolution/src/main/java/org/example/test_config.json"; // Provide the path to your JSON file
+        String fileName = "/Users/divanshujoshi/Documents/SnakesGame/SnakesAndLadder/src/main/java/org/example/test_config.json"; // Provide the path to your JSON file
         GameConfig gameConfig = GameConfigReader.readGameConfig(fileName);
 
         assertNotNull(gameConfig);
